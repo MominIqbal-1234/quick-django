@@ -4,17 +4,16 @@ Create django project quickly single command with all necessary file like djnago
 
 # How to use quick-django
 ## Step 1
-1) copy quick-django.py  <br> 
-2) past this location C:\Users\mypcname\AppData\Local\Programs\Python\Python37\Lib
+```python
+pip install quick-django
+```
 ## Step 2
 
 open cmd in your porject folder and run this command
-```python
-python -m quick-django [project name] [app name] 
 
-```
 ```python
 python -m quick-django myproject myproject_app 
 ```
 
-Check Our Site : https://mefiz.com
+Check Our Site : https://mefiz.com </br>
+pypi site : https://pypi.org/project/quick-django/
