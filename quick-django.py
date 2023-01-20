@@ -3,29 +3,26 @@ import time
 import sys
 
 
-"""
+# This project developed by Momin Iqbal 
+# Support : mefiz.com
+# ================================================================================================================
+# Create django project quickly single command with all necessary file like djnago app, urls.py, templates folder,
+# static folder and add the default code in view.py,models.py,admin.py and create index.html
 
-This project developed by Momin Iqbal 
-Support : mefiz.com
-================================================================================================================
-Create django project quickly single command with all necessary file like djnago app, urls.py, templates folder,
-static folder and add the default code in view.py,models.py,admin.py and create index.html
+# ----------------------------------------------------------------------------------------------------------------
 
-----------------------------------------------------------------------------------------------------------------
+# How to Use quick-django
+# Step 1:
+# 1) copy quick-django.py
+# 2) past this location C:\Users\mypcname\AppData\Local\Programs\Python\Python37\Lib
 
-How to Use quick-django
-Step 1:
-1) copy quick-django.py
-2) past this location C:\Users\mypcname\AppData\Local\Programs\Python\Python37\Lib
+# Step 2
+# open cmd in your porject folder and run this command
 
-Step 2
-open cmd in your porject folder and run this command
+# python -m quick-django [project name] [app name] 
+# python -m quick-django myproject myproject_app 
 
-python -m quick-django [project name] [app name] 
-python -m quick-django myproject myproject_app 
-
-Check Our Site : https://mefiz.com
-"""
+# Check Our Site : https://mefiz.com
 
 
 print(os.getcwd())
