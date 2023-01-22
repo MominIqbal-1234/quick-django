@@ -8,12 +8,20 @@ Create django project quickly single command with all necessary file like djnago
 pip install quick-django
 ```
 ## Step 2
-
+## Window
 open cmd in your porject folder and run this command
-
+        
 ```python
 python -m quick-django myproject myproject_app 
+        ```
+
+## Linux
+open terminal in your porject folder and run this command
+        
+```python
+python3 -m quick-django myproject myproject_app 
 ```
 
 Check Our Site : https://mefiz.com </br>
 pypi site : https://pypi.org/project/quick-django/
+
