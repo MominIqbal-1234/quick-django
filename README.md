@@ -13,7 +13,7 @@ open cmd in your porject folder and run this command
         
 ```python
 python -m quick-django myproject myproject_app 
-        ```
+```
 
 ## Linux
 open terminal in your porject folder and run this command
