@@ -1,6 +1,8 @@
 import os
 import time
 import sys
+import platform
+
 
 
 # This project developed by Momin Iqbal 
@@ -23,6 +25,8 @@ import sys
 # python -m quick-django myproject myproject_app 
 
 # Check Our Site : https://mefiz.com
+
+
 
 
 print(os.getcwd())
@@ -148,20 +152,25 @@ urlpatterns = [
 os.system(f'django-admin startproject {projectname}')
 time.sleep(1)
 
-# Change Folder
+
 if os.path.exists(projectname):
     pass
 else:
     exit()
 
+# Change Folder
 os.chdir(projectname)
 
 os.mkdir('static')
 os.mkdir('media')
 
+
 prCyan(f"[1]: {projectname} Project Create Successfully ......... OK ")
 # Create App
-os.system(f'python manage.py startapp {app_name}')
+if platform.system() == 'Linux':
+    os.system(f'python3 manage.py startapp {app_name}')
+else:
+    os.system(f'python manage.py startapp {app_name}')
 time.sleep(1)
 prCyan(f"[2]: {app_name} App Create Successfully ......... OK ")
 # Change Folder
@@ -183,6 +192,7 @@ file.write(urlscode)
 file.close() 
 prCyan(f"[6]: Modify Project setting.py successful ......... OK ")
 
+
 os.chdir("..")
 
 # Edit Your Django App
@@ -190,7 +200,9 @@ urlscode = Create.urls_py(app_name)
 views = Create.views_py()
 sample_html = Create.html()
 
+
 os.chdir(app_name)
+
 prCyan(f"[7]: Modification in {app_name} ......... OK ")
 file = open("urls.py","w") 
 file.write(urlscode)
