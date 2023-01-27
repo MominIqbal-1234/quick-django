@@ -4,7 +4,6 @@ import sys
 import platform
 
 
-
 # This project developed by Momin Iqbal 
 # Support : mefiz.com
 # ================================================================================================================
@@ -26,25 +25,6 @@ import platform
 
 # Check Our Site : https://mefiz.com
 
-
-
-
-print(os.getcwd())
-cwd = (os.getcwd())
-os.chdir(cwd)
-
-def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
-def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
- 
-
-projectname = sys.argv[1]
-app_name = sys.argv[2]
-
-if os.path.exists(projectname):
-    prRed(f"[0]: {projectname} project name already available")
-    exit()
-else:
-    pass
 
 
 class Create:
@@ -135,16 +115,94 @@ class Home(View):
         return HttpResponse('<h1>visit : <a href="https://mefiz.com">mefiz.com</a></h1>')
         # return render(request,'index.html')
         """
-    def mainurls_py(django_app):
+    def project_urls_py(django_app):
         return f"""
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls.static import static
+from django.conf import settings
+
+admin.site.site_header = "mysite header"
+admin.site.site_title = "mysite title"
+admin.site.index_title = "mysite index title"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('{django_app}.urls')),
 ]
+urlpatterns = urlpatterns+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
         """
+
+# For API
+
+class CreateApi:
+    def serializers_py(app_name):
+        return f"""
+        
+from rest_framework import serializers
+# from {app_name}.models import MyTableName
+
+
+
+# class MyTableNameSerializers(serializers.ModelSerializer):
+#     class Meta:
+#         model = MyTableName
+#         fields = '__all__'
+
+# class MyTableNameSerializers(serializers.ModelSerializer):
+#     class Meta:
+#         model = MyTableName
+#         fields = ('id','name')
+
+        """
+    def views_py_api(app_name):
+        return f"""
+from django.shortcuts import render,HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+# from {app_name}.models import MyTableName
+# from .serializers import MyTableNameSerializers
+
+@api_view(['GET'])
+def home(request):
+    return Response("hello world")
+    # items = MyTableName.objects.all()
+    # serializer = MyTableNameSerializers(items,many=True)
+    # return Response(serializer.data)
+        
+
+        """
+
+    def urls_py_api(django_app):
+        return f"""
+
+from django.urls import path
+from {django_app} import views
+
+urlpatterns = [
+      path('',views.home,name=''),
+]
+        """
+
+
+
+def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+ 
+
+projectname = sys.argv[1]
+app_name = sys.argv[2]
+try:
+    restapi = sys.argv[3]
+    restapi = restapi[2:]
+except:
+    restapi = None
+
+if os.path.exists(projectname):
+    prRed(f"[0]: {projectname} project name already available")
+    exit()
+else:
+    pass
 
 
 # Create Django Project
@@ -178,7 +236,7 @@ os.chdir(projectname)
 
 # Edit Project urls.py 
 prCyan(f"[3]: Modify Project urls.py ......... OK ")
-urlscode = Create.mainurls_py(app_name)
+urlscode = Create.project_urls_py(app_name)
 file = open("urls.py","w") 
 file.write(urlscode)
 file.close() 
@@ -198,7 +256,15 @@ os.chdir("..")
 # Edit Your Django App
 urlscode = Create.urls_py(app_name)
 views = Create.views_py()
+admin = Create.admin_py(app_name)
 sample_html = Create.html()
+models = Create.models_py()
+
+# API
+
+serializerspy = CreateApi.serializers_py(app_name)
+viewspyapi = CreateApi.views_py_api(app_name)
+urlspyapi = CreateApi.urls_py_api(app_name)
 
 
 os.chdir(app_name)
@@ -213,19 +279,42 @@ file.write(views)
 file.close() 
 
 
-admin = Create.admin_py(app_name)
+
 file = open("admin.py","w") 
 file.write(admin)
 file.close() 
 
-models = Create.models_py()
+
 file = open("models.py","w") 
 file.write(models)
 file.close() 
+
+# API
+if restapi == 'restapi':
+    file = open("serializers.py","w") 
+    file.write(serializerspy)
+    file.close() 
+
+    file = open("views.py","w") 
+    file.write(viewspyapi)
+    file.close() 
+
+    file = open("urls.py","w") 
+    file.write(urlspyapi)
+    file.close() 
 
 os.mkdir('templates')
 os.chdir("templates")
 file = open("index.html","w") 
 file.write(sample_html)
 file.close() 
+
+os.chdir("..")
+os.chdir("..")
+
+
+if platform.system() == 'Linux':
+    os.system(f'python3 manage.py migrate')
+else:
+    os.system(f'python manage.py migrate')
 prCyan(f"[8]: All operation successful ......... OK ")
