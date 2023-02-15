@@ -64,4 +64,5 @@ python3 -m quick-django myproject myproject_app --restapi
 
 Check Our Site : https://mefiz.com </br>
 pypi site : https://pypi.org/project/quick-django/
+developed by Momin Iqbal
 
